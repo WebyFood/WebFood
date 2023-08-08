@@ -1,20 +1,20 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './components/HomeScreean'; 
-import InicialScreen from './components/telaInicial';
+import HomeScreen from './HomeScreen';
+import telaInicial from './telaInicial';
 
 const Stack = createStackNavigator();
 
-const App = () => {
+const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Inicial" component={InicialScreen} />
+        <Stack.Screen name="Faça seu pedido" component={telaInicial} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default App;
+export default AppNavigator;
