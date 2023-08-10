@@ -1,7 +1,12 @@
 import React from 'react';
-import { View, Text, Image, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TextInput, ScrollView, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const OtherScreen = () => {
+  const navigation = useNavigation()
+
   const cardsData = [
     {
       image: require('../assets/prato1.jpg'),
@@ -29,6 +34,11 @@ const OtherScreen = () => {
     },
   ];
 
+  const irProduto = (card) => {
+    console.log(card)
+    navigation.navigate('Produto', {card})
+  }
+
   return (
     <View style={styles.container}>
       <Image source={require('../assets/capa.png')} style={styles.capa} />
@@ -48,7 +58,7 @@ const OtherScreen = () => {
               <Text style={styles.cardValor}>{card.valor}</Text>
             </View>
             <TouchableOpacity style={styles.comprarButton}>
-              <Text style={styles.comprarButtonText}>Comprar</Text>
+              <Text style={styles.comprarButtonText} onPress={(e) => {irProduto(card)}} > Comprar</Text>
             </TouchableOpacity>
           </View>
         ))}
