@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useState} from 'react';
 import { View, Text, Image, TextInput, ScrollView, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -34,6 +34,14 @@ const OtherScreen = () => {
     },
   ];
 
+  const [filterCardsData, setFilter] = useState(cardsData)
+  
+  const searchBar = (searchTerm) => {
+    console.log(searchTerm)
+    setFilter(cardsData.filter(item => item.titulo.toLocaleLowerCase().includes(searchTerm.toLowerCase())))
+    console.log(filterCardsData)
+  }
+
   const irProduto = (card) => {
     console.log(card)
     navigation.navigate('Produto', {card})
@@ -45,11 +53,12 @@ const OtherScreen = () => {
       <TextInput
         style={styles.searchInput}
         placeholder="Qual comida você procura?"
+        onChangeText={(newText)=>searchBar(newText)}
       />
       <Text style={styles.titulo}>Comidas</Text>
 
       <ScrollView>
-        {cardsData.map((card, index) => (
+        {filterCardsData.map((card, index) => (
           <View key={index} style={styles.cardContainer}>
             <Image source={card.image} style={styles.comidaImage} />
             <View style={styles.infoContainer}>
